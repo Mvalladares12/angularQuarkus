@@ -1,0 +1,25 @@
+
+<div class="box">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Codigo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tabla of tablas">
+      <th scope="row">{{tabla.codigo}}</th>
+      <td>{{ tabla.nombre }}</td>
+<!--      <td><a [routerLink]="['/actualiza', index]" [queryParams]="{action:'1'}">-->
+<!--        <img src="./assets/pencil.png" style="width: 25px; height: 25px;">-->
+<!--      </a>-->
+<!--        <a [routerLink]="['/actualiza', index]" [queryParams]="{action:'2'}">-->
+<!--          <img src="./assets/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">-->
+<!--        </a>-->
+<!--      </td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
