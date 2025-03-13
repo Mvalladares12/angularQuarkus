@@ -14,6 +14,10 @@ export class DataService {
   }
 
 
+  getTabla(id:number){
+    return this.http.get(this.apiURL+"/"+id);
+  }
+
 
   saveTabla(tabla:Tabla[]){
     this.http.post(this.apiURL,tabla).subscribe(
@@ -21,9 +25,6 @@ export class DataService {
       (error) => console.log(`Error: ${error}`)
     )
   }
-
-
-
 
 
   updateTabla(index:number, tabla:Tabla){

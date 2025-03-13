@@ -44,11 +44,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let tabla of tablas | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
-      <th class="text-center" scope="row">{{tabla.id}}</th>
+      <th class="text-center" scope="row">{{tabla.codigo}} {{tabla.id}}</th>
       <td class="text-center" >{{ tabla.nombre}}</td>
       <td class="text-center">
         <a [routerLink]="['/actualiza', tabla.id]" [queryParams]="{action:'1'}">
-        <img src="/pencil.png" style="width: 25px; height: 25px;">
+        <img [routerLink]="['/actualiza', tabla.id]" [queryParams]="{action:'1'}" src="/pencil.png" style="width: 25px; height: 25px;">
       </a>
         <swal
           #deleteSwal

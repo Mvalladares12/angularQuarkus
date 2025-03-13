@@ -15,23 +15,17 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   public p: number;
-  //collection: any[] = someArrayOfThings;
-
 
   index:any;
 
-  tablas: Tabla[]=[];
+
 
    delete(i:number) {
-    // ... don't save file and quit
     console.log("indice numero: "+i);
     this.tablaService.deleteTabla(i);
   }
 
-  public handleDismiss(): void {
-    // dismissMethod can be 'cancel', 'overlay', 'close', and 'timer'
-    // ... do something
-  }
+  public handleDismiss(): void {}
 
   constructor(private myService: ServiceTablaService, private tablaService: TablaService, private router:Router) {
   }
@@ -45,7 +39,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-
+  tablas: Tabla[] = [];
 
   registTabla(){
     let myTabla=new Tabla(
@@ -55,8 +49,6 @@ export class HomeComponent implements OnInit {
     );
     this.tablaService.addTabla(myTabla);
   }
-
-
 
 
   cId:number=0;

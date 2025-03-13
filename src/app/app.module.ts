@@ -16,7 +16,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
-  {path:'actualiza/:id',component:UpdateComponent},
+  {path:'actualiza/:id',component:UpdateComponent}
 ]
 
 @NgModule({
