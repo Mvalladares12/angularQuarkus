@@ -3,11 +3,13 @@ import {Tabla} from "./tabla.model";
 import {ServiceTablaService} from "./service-tabla.service";
 import {DataService} from "./data.service";
 
+
 @Injectable()
 export class TablaService {
   constructor(private serviceMsg: ServiceTablaService, private dataService: DataService) {}
 
   tablas: Tabla[]=[];
+
 
   setTabla(tabla:Tabla[]){
     this.tablas=tabla;
@@ -21,10 +23,14 @@ export class TablaService {
     console.log(this.tablas);
     this.serviceMsg.showMsg(
       `Agregar nombre ${tabla.nombre} con codigo ${tabla.codigo}`,
-    )
+    );
     this.tablas.push(tabla);
     this.dataService.saveTabla(this.tablas);
   }
+
+
+
+
 
   findTabla(index:number){
     let tabla:Tabla=this.tablas[index];

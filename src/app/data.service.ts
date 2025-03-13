@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Tabla} from "./tabla.model";
 
+
 @Injectable()
 export class DataService {
   constructor(private http: HttpClient) { }

@@ -12,6 +12,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { UpdateComponent } from './update/update.component';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
+    NgxPaginationModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()), ServiceTablaService, TablaService, DataService

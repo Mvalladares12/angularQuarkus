@@ -3,7 +3,7 @@
   +
 </button>
 
-<!-- Modal -->
+<!-- Modal-->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -12,15 +12,25 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" [(ngModel)]="cNombre" placeholder="">
+          <label for="floatingInput">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
+          <label for="floatingInput">Codigo</label>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+<!--        <button type="button" class="btn btn-primary">Understood</button>-->
+        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registTabla()">
       </div>
     </div>
   </div>
 </div>
+
+
 
 <div class="d-flex justify-content-center align-items-center" style="height: 25vh; margin-top: 20vh">
 <div class="box" style="width: 80%;">
@@ -33,11 +43,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tabla of tablas; let i = index" >
-      <th class="text-center" scope="row">{{tabla.codigo}}</th>
-      <td class="text-center" >{{ tabla.nombre }}</td>
+    <tr *ngFor="let tabla of tablas | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
+      <th class="text-center" scope="row">{{tabla.id}}</th>
+      <td class="text-center" >{{ tabla.nombre}}</td>
       <td class="text-center">
-        <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
+        <a [routerLink]="['/actualiza', tabla.id]" [queryParams]="{action:'1'}">
         <img src="/pencil.png" style="width: 25px; height: 25px;">
       </a>
         <swal
@@ -56,5 +66,9 @@
     </tr>
     </tbody>
   </table>
+  <pagination-controls class="d-flex justify-content-center align-items-center"  (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
+
 </div>
+
+

@@ -5,6 +5,7 @@ import {TablaService} from '../tabla.service';
 import {Router} from '@angular/router';
 
 
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -13,16 +14,13 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  //@Input() tablaList:Tabla;
+  public p: number;
+  //collection: any[] = someArrayOfThings;
+
+
   index:any;
 
   tablas: Tabla[]=[];
-
-  /*delete(i: number) {
-    // ... save file
-    //this.router.navigate(['']);
-
-  }*/
 
    delete(i:number) {
     // ... don't save file and quit
@@ -57,6 +55,9 @@ export class HomeComponent implements OnInit {
     );
     this.tablaService.addTabla(myTabla);
   }
+
+
+
 
   cId:number=0;
   cCodigo:number=0;
