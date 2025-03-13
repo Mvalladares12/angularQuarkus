@@ -10,15 +10,18 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent,}
+  {path:'',component:HomeComponent},
+  {path:'actualiza/:id',component:UpdateComponent},
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   //@Input() tablaList:Tabla;
-  //@Input() index:number;
+  @Input() index:number;
 
   tablas: Tabla[]=[];
 

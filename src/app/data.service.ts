@@ -6,7 +6,7 @@ import {Tabla} from "./tabla.model";
 export class DataService {
   constructor(private http: HttpClient) { }
 
-  private apiURL: string = "http://localhost:8080";
+  private apiURL: string = "http://localhost:8080/tabla";
 
   getTablas(){
     return this.http.get(this.apiURL);

@@ -1,25 +1,50 @@
+<!-- Button trigger modal -->
+<button style="margin-left: 15%; margin-top: 5%; background-color: white; color: black" type="button" class="btn btn-primary rounded-circle border border-gray shadow-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  +
+</button>
 
-<div class="box">
-  <table class="table table-hover">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar elemento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 25vh;">
+<div class="box" style="width: 80%;">
+  <table class="table table-hover w-100 border shadow">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">Codigo</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Acciones</th>
+      <th class="text-center" scope="col">Codigo</th>
+      <th class="text-center" scope="col">Nombre</th>
+      <th class="text-center" scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let tabla of tablas">
-      <th scope="row">{{tabla.codigo}}</th>
-      <td>{{ tabla.nombre }}</td>
-<!--      <td><a [routerLink]="['/actualiza', index]" [queryParams]="{action:'1'}">-->
-<!--        <img src="./assets/pencil.png" style="width: 25px; height: 25px;">-->
-<!--      </a>-->
-<!--        <a [routerLink]="['/actualiza', index]" [queryParams]="{action:'2'}">-->
-<!--          <img src="./assets/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">-->
-<!--        </a>-->
-<!--      </td>-->
+      <th class="text-center" scope="row">{{tabla.codigo}}</th>
+      <td class="text-center" >{{ tabla.nombre }}</td>
+      <td class="text-center"><a [routerLink]="['/actualiza', index]" [queryParams]="{action:'1'}">
+        <img src="/pencil.png" style="width: 25px; height: 25px;">
+      </a>
+        <a [routerLink]="['/actualiza', index]" [queryParams]="{action:'2'}">
+          <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">
+        </a>
+      </td>
     </tr>
     </tbody>
   </table>
+</div>
 </div>
