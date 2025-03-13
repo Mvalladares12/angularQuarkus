@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button style="margin-left: 15%; margin-top: 5%; background-color: white; color: black" type="button" class="btn btn-primary rounded-circle border border-gray shadow-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button style="margin-left: 15%; margin-top: 5vh; background-color: white; color: black;" type="button" class="btn btn-primary rounded-circle border border-gray shadow-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   +
 </button>
 
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center align-items-center" style="height: 25vh;">
+<div class="d-flex justify-content-center align-items-center" style="height: 25vh; margin-top: 20vh">
 <div class="box" style="width: 80%;">
   <table class="table table-hover w-100 border shadow">
     <thead class="thead-dark">
@@ -33,13 +33,23 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tabla of tablas">
+    <tr *ngFor="let tabla of tablas; let i = index" >
       <th class="text-center" scope="row">{{tabla.codigo}}</th>
       <td class="text-center" >{{ tabla.nombre }}</td>
-      <td class="text-center"><a [routerLink]="['/actualiza', index]" [queryParams]="{action:'1'}">
+      <td class="text-center">
+        <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
         <img src="/pencil.png" style="width: 25px; height: 25px;">
       </a>
-        <a [routerLink]="['/actualiza', index]" [queryParams]="{action:'2'}">
+        <swal
+          #deleteSwal
+          title="¿Borrar {{ tabla.nombre }}?"
+          text="Si lo elimina no se podrá recuperar"
+          icon="question"
+          [showCancelButton]="true"
+          [focusCancel]="true"
+          (confirm)="delete(tabla.id)">
+        </swal>
+        <a  [swal]="deleteSwal">
           <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">
         </a>
       </td>

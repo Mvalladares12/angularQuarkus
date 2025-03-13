@@ -4,6 +4,7 @@ import {ServiceTablaService} from '../service-tabla.service';
 import {TablaService} from '../tabla.service';
 import {Router} from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -13,9 +14,26 @@ import {Router} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   //@Input() tablaList:Tabla;
-  @Input() index:number;
+  index:any;
 
   tablas: Tabla[]=[];
+
+  /*delete(i: number) {
+    // ... save file
+    //this.router.navigate(['']);
+
+  }*/
+
+   delete(i:number) {
+    // ... don't save file and quit
+    console.log("indice numero: "+i);
+    this.tablaService.deleteTabla(i);
+  }
+
+  public handleDismiss(): void {
+    // dismissMethod can be 'cancel', 'overlay', 'close', and 'timer'
+    // ... do something
+  }
 
   constructor(private myService: ServiceTablaService, private tablaService: TablaService, private router:Router) {
   }

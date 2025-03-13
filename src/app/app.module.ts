@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { UpdateComponent } from './update/update.component';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SweetAlert2Module.forRoot(),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
