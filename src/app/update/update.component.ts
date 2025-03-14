@@ -22,7 +22,7 @@ export class UpdateComponent implements OnInit {
   tablas:Tabla[] = [];
 
   ngOnInit(): void {
-    this.action = parseInt(this.route.snapshot.queryParams['action']);
+    //this.action = parseInt(this.route.snapshot.queryParams['action']);
     this.tablas=this.tablaService.tablas;
     this.index=parseInt(this.route.snapshot.params['id']);
     let tabla:Tabla=this.tablaService.findTabla(this.index);

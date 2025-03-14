@@ -22,9 +22,11 @@ export class TablaService {
   }
 
   tablas: Tabla[]=[];
+  //tablaSinId=this.tablas.map(item=>({codigo:item.codigo, nombre:item.nombre}));
 
   addTabla(tabla:Tabla){
-    //console.log(this.tablas);
+    console.log(tabla);
+
     this.serviceMsg.showMsg(
       `Agregar nombre ${tabla.nombre} con codigo ${tabla.codigo}`,
     );

@@ -20,6 +20,9 @@
           <input type="number" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
           <label for="floatingInput">Codigo</label>
         </div>
+        <div class="form-floating mb-3">
+          <input type="hidden" class="form-control" id="sad" [(ngModel)]="cId" placeholder="">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -47,8 +50,8 @@
       <th class="text-center" scope="row">{{tabla.codigo}} {{tabla.id}}</th>
       <td class="text-center" >{{ tabla.nombre}}</td>
       <td class="text-center">
-        <a [routerLink]="['/actualiza', tabla.id]" [queryParams]="{action:'1'}">
-        <img [routerLink]="['/actualiza', tabla.id]" [queryParams]="{action:'1'}" src="/pencil.png" style="width: 25px; height: 25px;">
+        <a [routerLink]="['/actualiza', tabla.id]">
+        <img [routerLink]="['/actualiza', tabla.id]" src="/pencil.png" style="width: 25px; height: 25px;">
       </a>
         <swal
           #deleteSwal

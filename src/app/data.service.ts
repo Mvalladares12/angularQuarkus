@@ -20,9 +20,10 @@ export class DataService {
 
 
   saveTabla(tabla:Tabla[]){
-    this.http.post(this.apiURL,tabla).subscribe(
+    const tablaSinId=tabla.map(item=>({codigo:item.codigo, nombre:item.nombre}));
+    this.http.post(this.apiURL,tablaSinId).subscribe(
       (response)=>console.log('Se guardó la tabla'+response),
-      (error) => console.log(`Error: ${error}`)
+      (error) => console.error(`Error: ${error}`)
     )
   }
 

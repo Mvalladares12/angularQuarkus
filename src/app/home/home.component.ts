@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
 
   registTabla(){
     let myTabla=new Tabla(
-      this.cId,
+      this?.cId,
       this.cCodigo,
       this.cNombre
     );
