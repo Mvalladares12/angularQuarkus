@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tabla} from '../tabla.model';
-import {ServiceTablaService} from '../service-tabla.service';
-import {TablaService} from '../tabla.service';
+import {Departamento} from '../models/departamento.model';
+import {ServiceDepartamentoService} from '../services/service-departamento.service';
+import {DepartamentoService} from '../services/departamento.service';
 import {Router} from '@angular/router';
 
 
@@ -22,36 +22,36 @@ export class HomeComponent implements OnInit {
 
    delete(i:number) {
     console.log("indice numero: "+i);
-    this.tablaService.deleteTabla(i);
+    this.departamentoService.deleteDepartamentos(i);
   }
 
   public handleDismiss(): void {}
 
-  constructor(private myService: ServiceTablaService, private tablaService: TablaService, private router:Router) {
+  constructor(private myService: ServiceDepartamentoService, private departamentoService: DepartamentoService, private router:Router) {
   }
 
   ngOnInit(): void {
 
-    this.tablaService.loadTabla().subscribe(myTabla => {
-      console.log(myTabla);
-      this.tablas=Object.values(myTabla);
-      this.tablaService.setTabla(this.tablas);
+    this.departamentoService.loadDepartamentos().subscribe(myTabla => {
+      //console.log(myTabla);
+      this.departamentos=Object.values(myTabla);
+      this.departamentoService.setDepartamentos(this.departamentos);
     })
   }
 
-  tablas: Tabla[] = [];
+  departamentos: Departamento[] = [];
 
   registTabla(){
-    let myTabla=new Tabla(
+    let myTabla=new Departamento(
       this?.cId,
       this.cCodigo,
       this.cNombre
     );
-    this.tablaService.addTabla(myTabla);
+    this.departamentoService.addDepartamentos(myTabla);
   }
 
 
   cId:number=0;
-  cCodigo:number=0;
+  cCodigo:string="";
   cNombre:string='';
 }

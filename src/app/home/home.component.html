@@ -17,7 +17,7 @@
           <label for="floatingInput">Nombre</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
+          <input type="text" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
           <label for="floatingInput">Codigo</label>
         </div>
         <div class="form-floating mb-3">
@@ -46,21 +46,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tabla of tablas | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
-      <th class="text-center" scope="row">{{tabla.codigo}} {{tabla.id}}</th>
-      <td class="text-center" >{{ tabla.nombre}}</td>
+    <tr *ngFor="let depa of departamentos | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
+      <th class="text-center" scope="row">{{depa.codigo}}</th>
+      <td class="text-center" >{{ depa.nombre}}</td>
       <td class="text-center">
-        <a [routerLink]="['/actualiza', tabla.id]">
-        <img [routerLink]="['/actualiza', tabla.id]" src="/pencil.png" style="width: 25px; height: 25px;">
+        <a [routerLink]="['/actualiza', depa.id]">
+        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px;">
       </a>
         <swal
           #deleteSwal
-          title="¿Borrar {{ tabla.nombre }}?"
+          title="¿Borrar {{ depa.nombre }}?"
           text="Si lo elimina no se podrá recuperar"
           icon="question"
           [showCancelButton]="true"
           [focusCancel]="true"
-          (confirm)="delete(tabla.id)">
+          (confirm)="delete(depa.id)">
         </swal>
         <a  [swal]="deleteSwal">
           <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">

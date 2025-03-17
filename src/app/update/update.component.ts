@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {TablaService} from '../tabla.service';
+import {DepartamentoService} from '../services/departamento.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ServiceTablaService} from '../service-tabla.service';
-import {Tabla} from '../tabla.model';
+import {ServiceDepartamentoService} from '../services/service-departamento.service';
+import {Departamento} from '../models/departamento.model';
 
 @Component({
   selector: 'app-update',
@@ -12,51 +12,50 @@ import {Tabla} from '../tabla.model';
 })
 export class UpdateComponent implements OnInit {
 
-  constructor(public tablaService: TablaService,
+  constructor(public departamentoService: DepartamentoService,
               private router: Router,
               private route: ActivatedRoute,
-              private myService: ServiceTablaService) { }
+              private myService: ServiceDepartamentoService) { }
 
-
-
-  tablas:Tabla[] = [];
+  cId:number=0;
+  cNombre: string='';
+  cCodigo: string="";
+  index: number = 0;
+  action:number;
 
   ngOnInit(): void {
     //this.action = parseInt(this.route.snapshot.queryParams['action']);
-    this.tablas=this.tablaService.tablas;
+    this.tablas=this.departamentoService.tablas;
     this.index=parseInt(this.route.snapshot.params['id']);
-    let tabla:Tabla=this.tablaService.findTabla(this.index);
+    let tabla:Departamento=this.departamentoService.findDepartamentos(this.index);
     //console.log('indice  '+this.index);
-    this.cId = tabla.id;
+    //this.cId = tabla.id;
     this.cNombre = tabla.nombre;
     this.cCodigo = tabla.codigo;
 
   }
 
+  tablas:Departamento[] = [];
 
-
-  update(){
-    if(this.action==1){
-      this.router.navigate(['']);
-      let myTabla=new Tabla(
-        this.cId,
-        this.cCodigo,
-        this.cNombre
-      );
-      this.tablaService.updateTabla(this.index,myTabla);
-    }else {
-      this.router.navigate(['']);
-      this.tablaService.deleteTabla(this.index);
-    }
-  }
 
   backHome() {
     this.router.navigate(['']);
   }
+  update(){
+    if(this.action==1){
+      this.router.navigate(['']);
+      let myTabla=new Departamento(
+        this.cId,
+        this.cCodigo,
+        this.cNombre
+      );
+      this.departamentoService.updateDepartamentos(this.index,myTabla);
+    }else {
+      this.router.navigate(['']);
+      this.departamentoService.deleteDepartamentos(this.index);
+    }
+  }
 
-  cId:number=0;
-  cNombre: string='';
-  cCodigo: number=0;
-  index: number = 0;
-  action:number;
+
+
 }

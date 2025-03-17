@@ -3,9 +3,9 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ServiceTablaService} from './service-tabla.service';
-import {TablaService} from './tabla.service';
-import {DataService} from './data.service';
+import {ServiceDepartamentoService} from './services/service-departamento.service';
+import {DepartamentoService} from './services/departamento.service';
+import {DataService} from './services/data.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
@@ -35,7 +35,7 @@ const routes: Routes = [
     NgxPaginationModule,
   ],
   providers: [
-    provideClientHydration(withEventReplay()), ServiceTablaService, TablaService, DataService
+    provideClientHydration(withEventReplay()), ServiceDepartamentoService, DepartamentoService, DataService
   ],
   bootstrap: [AppComponent]
 })
