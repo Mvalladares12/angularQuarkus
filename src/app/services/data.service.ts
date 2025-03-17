@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Departamento} from "../models/departamento.model";
+import { DepartamentoDTO} from '../models/departamentoDTO.model';
 
 
 @Injectable()
@@ -19,7 +20,8 @@ export class DataService {
   }
 
 
-  saveDepartamentos(departamento:Departamento[]){
+  saveDepartamentos(departamento:DepartamentoDTO){
+    //const departamentoObj={departamento}
     this.http.post(this.apiURL,departamento).subscribe(
       (response)=>console.log('Se guardó el departamento'+response),
       (error) => console.error(`Error: ${error}`)

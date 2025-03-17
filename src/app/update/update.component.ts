@@ -3,6 +3,7 @@ import {DepartamentoService} from '../services/departamento.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceDepartamentoService} from '../services/service-departamento.service';
 import {Departamento} from '../models/departamento.model';
+import {DepartamentoDTO} from '../models/departamentoDTO.model';
 
 @Component({
   selector: 'app-update',
@@ -25,7 +26,7 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     //this.action = parseInt(this.route.snapshot.queryParams['action']);
-    this.tablas=this.departamentoService.tablas;
+    this.departamentoDTO=this.departamentoService.departamentoDTO;
     this.index=parseInt(this.route.snapshot.params['id']);
     let tabla:Departamento=this.departamentoService.findDepartamentos(this.index);
     //console.log('indice  '+this.index);
@@ -35,7 +36,8 @@ export class UpdateComponent implements OnInit {
 
   }
 
-  tablas:Departamento[] = [];
+  departamentos:Departamento[] = [];
+  departamentoDTO:DepartamentoDTO[]=[];
 
 
   backHome() {

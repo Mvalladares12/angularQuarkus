@@ -3,7 +3,7 @@ import {Departamento} from '../models/departamento.model';
 import {ServiceDepartamentoService} from '../services/service-departamento.service';
 import {DepartamentoService} from '../services/departamento.service';
 import {Router} from '@angular/router';
-
+import {DepartamentoDTO} from '../models/departamentoDTO.model';
 
 
 @Component({
@@ -40,14 +40,15 @@ export class HomeComponent implements OnInit {
   }
 
   departamentos: Departamento[] = [];
+   departamentoDTO: DepartamentoDTO[] = [];
 
   registTabla(){
-    let myTabla=new Departamento(
-      this?.cId,
+    let myDepartamento=new DepartamentoDTO(
+      //this?.cId,
       this.cCodigo,
       this.cNombre
     );
-    this.departamentoService.addDepartamentos(myTabla);
+    this.departamentoService.addDepartamentos(myDepartamento);
   }
 
 

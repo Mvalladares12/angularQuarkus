@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Departamento} from "../models/departamento.model";
 import {ServiceDepartamentoService} from "./service-departamento.service";
 import {DataService} from "./data.service";
-
+import {DepartamentoDTO} from '../models/departamentoDTO.model';
 
 @Injectable()
 export class DepartamentoService {
@@ -13,46 +13,53 @@ export class DepartamentoService {
 
 
   setDepartamentos(myTabla:Departamento[]){
-    this.tablas=myTabla;
-    //console.log(myTabla);
+    this.departamentos=myTabla;
   }
+
+
 
   loadDepartamentos(){
     return this.dataService.getDepartamentos();
   }
 
-  tablas: Departamento[]=[];
 
-  addDepartamentos(departamento:Departamento){
-    console.log(departamento);
 
+  departamentos: Departamento[]=[];
+  departamentoDTO: DepartamentoDTO[]=[];
+  departamento:DepartamentoDTO;
+
+
+
+  addDepartamentos(departamento:DepartamentoDTO){
+    let primerDep=departamento;
     this.serviceMsg.showMsg(
-      `Agregar nombre ${departamento.nombre} con codigo ${departamento.codigo}`,
+      `Agregar nombre ${primerDep.nombre} con codigo ${primerDep.codigo}`,
     );
-    this.tablas.push(departamento);
-    this.dataService.saveDepartamentos(this.tablas);
+    this.dataService.saveDepartamentos(primerDep);
   }
+
 
 
   findDepartamentos(index: number){
-    console.log(this.tablas);
-    console.log(this.tablas[index]);
-    return this.tablas[index];
+    console.log(this.departamentos);
+    console.log(this.departamentos[index]);
+    return this.departamentos[index];
   }
 
 
+
   updateDepartamentos(index:number, departamento:Departamento){
-    let modifiedDepa=this.tablas[index];
+    let modifiedDepa=this.departamentos[index];
     modifiedDepa.nombre=departamento.nombre;
 
     this.dataService.updateDepartamentos(index,modifiedDepa);
   }
 
+
+
   deleteDepartamentos(index:number){
-    this.tablas.splice(index,1);
-
+    this.departamentos.splice(index,1);
     this.dataService.deleteDepartamentos(index);
-
-    if(this.tablas!=null) this.dataService.saveDepartamentos(this.tablas);
+    if(this.departamentos!=null) this.dataService.saveDepartamentos(this.departamento);
   }
 }

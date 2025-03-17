@@ -20,9 +20,6 @@
           <input type="text" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
           <label for="floatingInput">Codigo</label>
         </div>
-        <div class="form-floating mb-3">
-          <input type="hidden" class="form-control" id="sad" [(ngModel)]="cId" placeholder="">
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -51,7 +48,7 @@
       <td class="text-center" >{{ depa.nombre}}</td>
       <td class="text-center">
         <a [routerLink]="['/actualiza', depa.id]">
-        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px;">
+        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
       </a>
         <swal
           #deleteSwal
@@ -63,7 +60,7 @@
           (confirm)="delete(depa.id)">
         </swal>
         <a  [swal]="deleteSwal">
-          <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px;">
+          <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px; cursor: pointer;">
         </a>
       </td>
     </tr>
