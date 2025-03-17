@@ -20,21 +20,30 @@ export class UpdateComponent implements OnInit {
 
   cId:number=0;
   cNombre: string='';
-  cCodigo: string="";
+  cCodigo: string='';
   index: number = 0;
-  action:number;
+  action: number = 0;
 
   ngOnInit(): void {
-    //this.action = parseInt(this.route.snapshot.queryParams['action']);
-    this.departamentoDTO=this.departamentoService.departamentoDTO;
+    this.departamentoService.loadDepartamentos().subscribe(myTabla => {
+      this.departamentos=Object.values(myTabla);
+      this.departamentoService.setDepartamentos(this.departamentos);
+    })
+    this.departamentos=this.departamentoService.departamentos;
     this.index=parseInt(this.route.snapshot.params['id']);
-    let tabla:Departamento=this.departamentoService.findDepartamentos(this.index);
-    //console.log('indice  '+this.index);
-    //this.cId = tabla.id;
-    this.cNombre = tabla.nombre;
-    this.cCodigo = tabla.codigo;
+    if(this.index<this.departamentos.length){
+      //let departamento:Departamento|undefined=this.departamentoService.findDepartamentos(this.index);
+      let departamento=this.departamentoService.findDepartamentos(this.index);
+      console.log(departamento);
+      this.cNombre = departamento!.nombre;
+      this.cCodigo = departamento!.codigo;
+    }else {
+      console.log("Fuera del rango de la lista");
+    }
+
 
   }
+
 
   departamentos:Departamento[] = [];
   departamentoDTO:DepartamentoDTO[]=[];
@@ -43,21 +52,20 @@ export class UpdateComponent implements OnInit {
   backHome() {
     this.router.navigate(['']);
   }
-  update(){
+
+
+  /*update(){
     if(this.action==1){
       this.router.navigate(['']);
-      let myTabla=new Departamento(
-        this.cId,
+      let myTabla=new DepartamentoDTO(
         this.cCodigo,
         this.cNombre
       );
       this.departamentoService.updateDepartamentos(this.index,myTabla);
     }else {
       this.router.navigate(['']);
-      this.departamentoService.deleteDepartamentos(this.index);
+      //this.departamentoService.deleteDepartamentos(this.index);
     }
-  }
-
-
+  }*/
 
 }

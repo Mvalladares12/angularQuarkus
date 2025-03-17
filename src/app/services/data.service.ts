@@ -15,7 +15,7 @@ export class DataService {
   }
 
 
-  getTabla(id:number){
+  getDepa(id:number){
     return this.http.get(this.apiURL+"/"+id);
   }
 

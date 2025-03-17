@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
   }
 
   departamentos: Departamento[] = [];
-   departamentoDTO: DepartamentoDTO[] = [];
 
   registTabla(){
     let myDepartamento=new DepartamentoDTO(
@@ -51,8 +50,6 @@ export class HomeComponent implements OnInit {
     this.departamentoService.addDepartamentos(myDepartamento);
   }
 
-
-  cId:number=0;
   cCodigo:string="";
   cNombre:string='';
 }

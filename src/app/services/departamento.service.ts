@@ -7,13 +7,12 @@ import {DepartamentoDTO} from '../models/departamentoDTO.model';
 @Injectable()
 export class DepartamentoService {
   constructor(private serviceMsg: ServiceDepartamentoService,
-              private dataService: DataService) {}
+              private dataService: DataService
+  ) {}
 
 
-
-
-  setDepartamentos(myTabla:Departamento[]){
-    this.departamentos=myTabla;
+  setDepartamentos(myDepartamento:Departamento[]){
+    this.departamentos=myDepartamento;
   }
 
 
@@ -25,30 +24,34 @@ export class DepartamentoService {
 
 
   departamentos: Departamento[]=[];
-  departamentoDTO: DepartamentoDTO[]=[];
+  //departamentoDTO: DepartamentoDTO[]=[];
   departamento:DepartamentoDTO;
 
 
 
   addDepartamentos(departamento:DepartamentoDTO){
-    let primerDep=departamento;
-    this.serviceMsg.showMsg(
-      `Agregar nombre ${primerDep.nombre} con codigo ${primerDep.codigo}`,
-    );
-    this.dataService.saveDepartamentos(primerDep);
+    this.dataService.saveDepartamentos(departamento);
   }
 
 
 
   findDepartamentos(index: number){
-    console.log(this.departamentos);
-    console.log(this.departamentos[index]);
-    return this.departamentos[index];
+    let depa:Departamento=this.departamentos[index];
+
+    //esto es una prueba
+    //let depa:Departamento|undefined=this.departamentos.find(x=>x.id===index);
+    console.log(depa);
+    return depa;
+  }
+
+
+  findDepa(id:number){
+    return this.dataService.getDepa(id);
   }
 
 
 
-  updateDepartamentos(index:number, departamento:Departamento){
+  updateDepartamentos(index:number, departamento:DepartamentoDTO){
     let modifiedDepa=this.departamentos[index];
     modifiedDepa.nombre=departamento.nombre;
 
