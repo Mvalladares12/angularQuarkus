@@ -1,0 +1,80 @@
+<!-- Button trigger modal -->
+<button style="margin-left: 15%; margin-top: 5vh; background-color: white; color: black;" type="button" class="btn btn-primary rounded-circle border border-gray shadow-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  +
+</button>
+
+<!-- Modal-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar elemento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" [(ngModel)]="cNombre" placeholder="">
+          <label for="floatingInput">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
+          <label for="floatingInput">Codigo</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" id="a" [(ngModel)]="cIdMunicipio" placeholder="">
+          <label for="floatingInput">Departamento</label>
+          <!--          <select [(ngModel)]="depa.id"> </select>-->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!--        <button type="button" class="btn btn-primary">Understood</button>-->
+        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registroDistrito()" data-bs-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="d-flex justify-content-center align-items-center" style="height: 25vh; margin-top: 20vh">
+  <div class="box" style="width: 80%;">
+    <table class="table table-hover w-100 border shadow">
+      <thead class="thead-dark">
+      <tr>
+        <th class="text-center" scope="col">Codigo</th>
+        <th class="text-center" scope="col">Nombre</th>
+        <th class="text-center" scope="col">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dist of distritos | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
+        <th class="text-center" scope="row">{{dist.codigo}}</th>
+        <td class="text-center" >{{ dist.nombre}}</td>
+        <td class="text-center">
+          <!--        <a [routerLink]="['/actualiza', depa.id]">-->
+          <!--        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">-->
+          <!--      </a>-->
+          <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
+            <img [routerLink]="['/actualiza', i]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
+          </a>
+          <swal
+            #deleteSwal
+            title="¿Borrar {{ dist.nombre }}?"
+            text="Si lo elimina no se podrá recuperar"
+            icon="question"
+            [showCancelButton]="true"
+            [focusCancel]="true"
+            (confirm)="deleteDistrito(dist.id)">
+          </swal>
+          <a  [swal]="deleteSwal">
+            <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px; cursor: pointer;">
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="d-flex justify-content-center align-items-center"  (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  </div>
+
+</div>

@@ -1,0 +1,11 @@
+.offcanvas {
+  width: 100px;
+}
+
+.navbar {
+  z-index: 1031; /* Un valor alto para asegurar que esté encima */
+}
+
+.offcanvas {
+  z-index: 1030; /* Un valor menor que el navbar */
+}

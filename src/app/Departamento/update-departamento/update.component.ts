@@ -1,22 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {DepartamentoService} from '../services/departamento.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {DepartamentoService} from '../services-departamento/departamento.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ServiceDepartamentoService} from '../services/service-departamento.service';
-import {Departamento} from '../models/departamento.model';
-import {DepartamentoDTO} from '../models/departamentoDTO.model';
+import {Departamento} from '../models-departamento/departamento.model';
+import {DepartamentoDTO} from '../models-departamento/departamentoDTO.model';
 
 @Component({
-  selector: 'app-update',
+  selector: 'app-update-departamento',
   standalone: false,
   templateUrl: './update.component.html',
   styleUrl: './update.component.css'
 })
 export class UpdateComponent implements OnInit {
 
-  constructor(public departamentoService: DepartamentoService,
+  constructor(
+              public departamentoService: DepartamentoService,
               private router: Router,
-              private route: ActivatedRoute,
-              private myService: ServiceDepartamentoService) { }
+              private route: ActivatedRoute,) { }
 
   cId:number=0;
   cNombre: string='';
@@ -24,28 +23,29 @@ export class UpdateComponent implements OnInit {
   index: number = 0;
   action: number = 0;
 
+  departamentos:Departamento[] = [];
+
   ngOnInit(): void {
-    this.departamentoService.loadDepartamentos().subscribe(myTabla => {
+    /*this.departamentoService.loadDepartamentos().subscribe(myTabla => {
       this.departamentos=Object.values(myTabla);
       this.departamentoService.setDepartamentos(this.departamentos);
-    })
+    })*/
+    this.action = parseInt(this.route.snapshot.queryParams['action']);
     this.departamentos=this.departamentoService.departamentos;
     this.index=parseInt(this.route.snapshot.params['id']);
+    console.log(this.departamentos);
+    console.log(this.index);
     if(this.index<this.departamentos.length){
-      //let departamento:Departamento|undefined=this.departamentoService.findDepartamentos(this.index);
-      let departamento=this.departamentoService.findDepartamentos(this.index);
-      console.log(departamento);
-      this.cNombre = departamento!.nombre;
-      this.cCodigo = departamento!.codigo;
+      let departamento:Departamento=this.departamentoService.findDepartamentos(this.index);
+      this.cNombre = departamento.nombre;
+      this.cCodigo = departamento.codigo;
     }else {
-      console.log("Fuera del rango de la lista");
+      console.log("fuera de rango")
     }
-
-
   }
 
 
-  departamentos:Departamento[] = [];
+
   departamentoDTO:DepartamentoDTO[]=[];
 
 
@@ -54,7 +54,7 @@ export class UpdateComponent implements OnInit {
   }
 
 
-  /*update(){
+  /*update-departamento(){
     if(this.action==1){
       this.router.navigate(['']);
       let myTabla=new DepartamentoDTO(

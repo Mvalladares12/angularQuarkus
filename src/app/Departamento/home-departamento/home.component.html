@@ -24,7 +24,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 <!--        <button type="button" class="btn btn-primary">Understood</button>-->
-        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registTabla()">
+        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registTabla()" data-bs-dismiss="modal">
       </div>
     </div>
   </div>
@@ -47,9 +47,12 @@
       <th class="text-center" scope="row">{{depa.codigo}}</th>
       <td class="text-center" >{{ depa.nombre}}</td>
       <td class="text-center">
-        <a [routerLink]="['/actualiza', depa.id]">
-        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
-      </a>
+<!--        <a [routerLink]="['/actualiza', depa.id]">-->
+<!--        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">-->
+<!--      </a>-->
+        <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
+          <img [routerLink]="['/actualiza', i]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
+        </a>
         <swal
           #deleteSwal
           title="¿Borrar {{ depa.nombre }}?"
