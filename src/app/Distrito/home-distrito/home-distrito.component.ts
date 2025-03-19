@@ -27,9 +27,9 @@ export class HomeDistritoComponent implements OnInit {
 
   distritos:Distrito[]=[]
 
-  deleteDistrito(i:number){
-    this.distritos.splice(i,1);
-    this.distritoService.deleteDistritos(i);
+  deleteDistrito(id:number, index:number){
+    this.distritos.splice(index,1);
+    this.distritoService.deleteDistritos(id);
   }
 
 

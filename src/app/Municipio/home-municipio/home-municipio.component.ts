@@ -38,8 +38,9 @@ export class HomeMunicipioComponent implements OnInit {
   depa:Depa[]=[];
   datoSeleccionado:Municipio;
 
-  deleteMunicipios(i:number){
-    this.municipioService.deleteMunicipios(i);
+  deleteMunicipios(id:number, index:number){
+    this.municipioService.deleteMunicipios(id);
+    this.municipios.splice(index,1);
   }
 
 

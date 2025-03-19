@@ -31,8 +31,9 @@ export class HomeComponent implements OnInit {
 
   departamentos: Departamento[] = [];
 
-  delete(i:number) {
-    this.departamentoService.deleteDepartamentos(i);
+  delete(id:number, index:number) {
+    this.departamentoService.deleteDepartamentos(id);
+    this.departamentos.splice(index,1);
   }
 
   registTabla(){

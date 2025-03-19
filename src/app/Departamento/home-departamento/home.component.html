@@ -60,7 +60,7 @@
           icon="question"
           [showCancelButton]="true"
           [focusCancel]="true"
-          (confirm)="delete(depa.id)">
+          (confirm)="delete(depa.id, i)">
         </swal>
         <a  [swal]="deleteSwal">
           <img src="/trash.png" style="width: 25px; height: 25px; margin-left: 10px; cursor: pointer;">
