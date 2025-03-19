@@ -3,6 +3,7 @@ import {Departamento} from '../models-departamento/departamento.model';
 import {DepartamentoService} from '../services-departamento/departamento.service';
 import {Router} from '@angular/router';
 import {DepartamentoDTO} from '../models-departamento/departamentoDTO.model';
+import {PrintService} from '../../print.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {DepartamentoDTO} from '../models-departamento/departamentoDTO.model';
 export class HomeComponent implements OnInit {
 
 
-  constructor(private departamentoService: DepartamentoService, private router:Router) {
+  constructor(private departamentoService: DepartamentoService, private router:Router, private print:PrintService) {
   }
 
   ngOnInit(): void {
@@ -39,12 +40,12 @@ export class HomeComponent implements OnInit {
   registTabla(){
     let depa=new Departamento(
       this?.cId,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
       this.cNombre
     )
     let myDepartamento=new DepartamentoDTO(
       //this?.cId,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
       this.cNombre
     );
     this.departamentoService.addDepartamentos(myDepartamento, depa);
@@ -52,7 +53,30 @@ export class HomeComponent implements OnInit {
     this.cNombre=''
   }
 
+  clean(){
+    this.cCodigo='';
+    this.cNombre='';
+  }
+
   cId:number=0;
   cCodigo:string="";
   cNombre:string='';
+
+
+  generarReporte() {
+    const encabezado=["id","Nombre", "Codigo"];
+    this.departamentoService.loadDepartamentos().subscribe(data=>{
+      const body=Object(data).map(
+        (obj:any)=>{
+          const datos=[
+            obj.id,
+            obj.nombre,
+            obj.codigo,
+          ]
+          return datos;
+        }
+      );
+      this.print.imprimir(encabezado, body, "departamento", true);
+    })
+  }
 }

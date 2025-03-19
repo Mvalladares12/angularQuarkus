@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DistritoService} from '../services-distrito/distrito.service';
-import {Distrito} from '../models-distrito/distrito.model';
+import {Distrito, Muni} from '../models-distrito/distrito.model';
 import {DistritoDTO} from '../models-distrito/distritoDTO.model';
+import {PrintService} from '../../print.service';
 
 @Component({
   selector: 'app-home-distrito',
@@ -11,7 +12,7 @@ import {DistritoDTO} from '../models-distrito/distritoDTO.model';
 })
 export class HomeDistritoComponent implements OnInit {
 
-  constructor(private distritoService: DistritoService) {
+  constructor(private distritoService: DistritoService, private print: PrintService) {
   }
 
   ngOnInit(): void {
@@ -19,13 +20,19 @@ export class HomeDistritoComponent implements OnInit {
       this.distritos=Object.values(distri);
       this.distritoService.setDistritos(this.distritos);
     })
+
+    this.distritoService.loadMuni().subscribe(myMuni => {
+      this.muni= Object.values(myMuni);
+      this.distritoService.setMuni(this.muni);
+    })
   }
 
   public p: number;
 
   index:number;
 
-  distritos:Distrito[]=[]
+  distritos:Distrito[]=[];
+  muni:Muni[]=[];
 
   deleteDistrito(id:number, index:number){
     this.distritos.splice(index,1);
@@ -34,17 +41,28 @@ export class HomeDistritoComponent implements OnInit {
 
 
   registroDistrito(){
+
+    const arreglo=this.muni.find(x=>x.nombre===this.cMuni);
+
+    if(arreglo){
+      this.cIdMunicipio=arreglo.id
+      console.log(this.cIdMunicipio)
+    }else {
+      console.log('no se encontró'+this.cIdMunicipio)
+    }
+
+
     let distri=new Distrito(
       this.cId,
       this.cNombre,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
       this.cIdMunicipio,
     )
 
     let myDist=new DistritoDTO(
       this.cIdMunicipio,
       this.cNombre,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
     )
 
     this.distritoService.addDistritos(myDist,distri);
@@ -53,8 +71,31 @@ export class HomeDistritoComponent implements OnInit {
     this.cNombre='';
   }
 
+  clean(){
+    this.cCodigo='';
+    this.cNombre='';
+  }
+
   cId:number=0;
   cIdMunicipio:number;
   cCodigo:string="";
   cNombre:string='';
+  cMuni:string='';
+
+  generarReporte() {
+    const encabezado=["id","Nombre", "Codigo"];
+    this.distritoService.loadDistritos().subscribe(data=>{
+      const body=Object(data).map(
+        (obj:any)=>{
+          const datos=[
+            obj.id,
+            obj.nombre,
+            obj.codigo,
+          ]
+          return datos;
+        }
+      );
+      this.print.imprimir(encabezado, body, "departamento", true);
+    })
+  }
 }

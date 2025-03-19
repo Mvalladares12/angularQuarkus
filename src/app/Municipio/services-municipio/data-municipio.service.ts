@@ -9,9 +9,15 @@ export class DataMunicipioService {
   constructor(private http: HttpClient) { }
 
   private apiURL: string = "http://localhost:8080/municipio";
+  private apiDepa: string = "http://localhost:8080/departamento";
 
   getMunicipios(){
     return this.http.get(this.apiURL);
+  }
+
+
+  getDepa(){
+    return this.http.get(this.apiDepa);
   }
 
 

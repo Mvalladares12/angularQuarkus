@@ -20,12 +20,14 @@ import { HomeDistritoComponent } from './Distrito/home-distrito/home-distrito.co
 import { UpdateDistritoComponent } from './Distrito/update-distrito/update-distrito.component';
 import {DistritoService} from './Distrito/services-distrito/distrito.service';
 import {DataDistritoService} from './Distrito/services-distrito/data-distrito.service';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'actualiza/:id',component:UpdateComponent},
   {path:'municipio',component:HomeMunicipioComponent},
   {path:'distrito',component:HomeDistritoComponent},
+  {path:'**',component:ErrorComponent},
 ]
 
 @NgModule({
@@ -36,7 +38,8 @@ const routes: Routes = [
     HomeMunicipioComponent,
     UpdateMunicipioComponent,
     HomeDistritoComponent,
-    UpdateDistritoComponent
+    UpdateDistritoComponent,
+    ErrorComponent
   ],
   imports: [
     //UpdateComponent,

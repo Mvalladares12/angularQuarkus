@@ -13,7 +13,7 @@ export class Municipio{
   nombre:string='';
 }
 
-export interface Depa{
+export class Depa{
   id:number;
   nombre:string;
 }

@@ -12,3 +12,9 @@ export class Distrito{
   codigo:string;
   idMunicipio:number;
 }
+
+
+export class Muni{
+  id:number;
+  nombre:string;
+}

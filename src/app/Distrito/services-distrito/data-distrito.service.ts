@@ -9,9 +9,15 @@ export class DataDistritoService {
   constructor(private http: HttpClient) { }
 
   private apiURL: string = "http://localhost:8080/distrito";
+  private apiMuni: string = "http://localhost:8080/municipio";
 
   getDistritos(){
     return this.http.get(this.apiURL);
+  }
+
+
+  getMuni(){
+    return this.http.get(this.apiMuni);
   }
 
 

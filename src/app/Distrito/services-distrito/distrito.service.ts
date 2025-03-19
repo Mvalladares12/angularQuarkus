@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DataDistritoService} from './data-distrito.service';
-import {Distrito} from '../models-distrito/distrito.model';
+import {Distrito, Muni} from '../models-distrito/distrito.model';
 import {DistritoDTO} from '../models-distrito/distritoDTO.model';
 
 
@@ -19,11 +19,20 @@ export class DistritoService{
   }
 
 
-  //distrito:DistritoDTO;
   distritos: Distrito[]=[];
-  //departamentoDTO: DepartamentoDTO[]=[];
 
 
+  setMuni(muni:Muni[]){
+    this.muni=muni;
+  }
+
+
+  loadMuni(){
+    return this.dataDistritoService.getMuni();
+  }
+
+
+  muni:Muni[]=[];
 
 
   addDistritos(distrito:DistritoDTO, distri:Distrito){

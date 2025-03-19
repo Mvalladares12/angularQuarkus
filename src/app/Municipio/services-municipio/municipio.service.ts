@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DataMunicipioService} from './data-municipio.service';
 import {MunicipioDTO} from '../models-municipio/municipioDTO.model';
-import {Municipio} from '../models-municipio/municipio.model';
+import {Depa, Municipio} from '../models-municipio/municipio.model';
 
 @Injectable()
 export class MunicipioService {
@@ -18,10 +18,18 @@ export class MunicipioService {
   }
 
 
-  //municipio:MunicipioDTO;
   municipios: Municipio[]=[];
-  //departamentoDTO: DepartamentoDTO[]=[];
 
+
+  setDepa(depa:Depa[]){
+    this.depa = depa;
+  }
+
+  loadDepa(){
+    return this.dataService.getDepa();
+  }
+
+  depa: Depa[]=[];
 
 
 

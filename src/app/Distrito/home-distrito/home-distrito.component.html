@@ -13,23 +13,34 @@
       </div>
       <div class="modal-body">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" [(ngModel)]="cNombre" placeholder="">
+          <input type="text" class="form-control" id="floatingInput" #nombre="ngModel" [(ngModel)]="cNombre" required placeholder="Nombre" maxlength="80">
           <label for="floatingInput">Nombre</label>
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) || nombre.value?.length > 80" class="text-danger">
+            El nombre es obligatorio.
+          </div>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="" [(ngModel)]="cCodigo" placeholder="">
-          <label for="floatingInput">Codigo</label>
+          <input type="text" class="form-control" id="codigoInput" style="text-transform:uppercase" [(ngModel)]="cCodigo" #codigo="ngModel" required placeholder="Codigo" maxlength="3">
+          <label for="codigoInput">Codigo</label>
+          <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched) || codigo.value?.length > 3" class="text-danger">
+            El código es obligatorio.
+          </div>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" id="a" [(ngModel)]="cIdMunicipio" placeholder="">
-          <label for="floatingInput">Departamento</label>
-          <!--          <select [(ngModel)]="depa.id"> </select>-->
+          <select class="form-select" id="muniSelect" [(ngModel)]="cMuni" #municipio="ngModel" required placeholder="Municipio">
+            <option value="" disabled selected>Seleccione un Municipio</option>
+            <option *ngFor="let muni of muni">{{muni.nombre}}</option>
+          </select>
+          <label for="muniSelect">Municipio</label>
+          <div *ngIf="municipio.invalid && (municipio.dirty || municipio.touched)" class="text-danger">
+            El Municipio es obligatorio.
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-secondary"  data-bs-dismiss="modal" (click)="clean()">Cancelar</button>
         <!--        <button type="button" class="btn btn-primary">Understood</button>-->
-        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registroDistrito()" data-bs-dismiss="modal">
+        <input type="submit" class="btn btn-primary" value="Agregar" (click)="registroDistrito()" data-bs-dismiss="modal" [disabled]="nombre.invalid || codigo.invalid || municipio.invalid">
       </div>
     </div>
   </div>
@@ -49,7 +60,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let dist of distritos | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
-        <th class="text-center" scope="row">{{dist.codigo}}</th>
+        <td class="text-center" scope="row">{{dist.codigo}}</td>
         <td class="text-center" >{{ dist.nombre}}</td>
         <td class="text-center">
           <!--        <a [routerLink]="['/actualiza', depa.id]">-->
@@ -74,7 +85,12 @@
       </tr>
       </tbody>
     </table>
-    <pagination-controls class="d-flex justify-content-center align-items-center"  (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+      <div class="d-flex justify-content-center align-items-center mt-3">
+        <button class="btn me-2 w-100 border shadow" (click)="generarReporte()"><img src="/print.png" style="width: 45px; height: 25px;"></button>
+      </div>
+    </div>
   </div>
 
 </div>

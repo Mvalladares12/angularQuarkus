@@ -4,6 +4,7 @@ import {Depa, Municipio} from '../models-municipio/municipio.model';
 import {MunicipioDTO} from '../models-municipio/municipioDTO.model';
 import {DataDepartamentoService} from '../../Departamento/services-departamento/data-departamento.service';
 import {DataMunicipioService} from '../services-municipio/data-municipio.service';
+import {PrintService} from '../../print.service';
 
 @Component({
   selector: 'app-home-municipio',
@@ -13,20 +14,19 @@ import {DataMunicipioService} from '../services-municipio/data-municipio.service
 })
 export class HomeMunicipioComponent implements OnInit {
 
-  //id:number;
 
-  constructor(private municipioService:MunicipioService,private dataMunicipioService:DataMunicipioService,private dataDepartamentoService: DataDepartamentoService) { }
+  constructor(private municipioService:MunicipioService, private print:PrintService) { }
+
 
   ngOnInit(): void {
     this.municipioService.loadMunicipios().subscribe(myMunicipio => {
       this.municipios=Object.values(myMunicipio);
       this.municipioService.setMunicipios(this.municipios);
+    })
 
-
-      //para probar rellenar el campo
-      this.dataDepartamentoService.getDepa().subscribe((myDepartamento) => {
-        this.depa=myDepartamento;
-      })
+    this.municipioService.loadDepa().subscribe((myDepartamento) => {
+      this.depa=Object.values(myDepartamento);
+      this.municipioService.setDepa(this.depa);
     })
   }
 
@@ -36,7 +36,6 @@ export class HomeMunicipioComponent implements OnInit {
 
   municipios:Municipio[]=[];
   depa:Depa[]=[];
-  datoSeleccionado:Municipio;
 
   deleteMunicipios(id:number, index:number){
     this.municipioService.deleteMunicipios(id);
@@ -44,22 +43,31 @@ export class HomeMunicipioComponent implements OnInit {
   }
 
 
-  selectDepartamento(muni:Municipio){
-    this.datoSeleccionado = muni;
-  }
-
 
   registMunicipio(){
+
+    const arreglo=this.depa.find(x=>x.nombre===this.cDepa);
+
+    if(arreglo){
+      this.cIdDepartam=arreglo.id
+      console.log(this.cIdDepartam)
+      //this.cIdDepartam=this.idencontrado;
+    }else {
+      console.log('no se encontró'+this.cIdDepartam)
+    }
+
+
     let muni=new Municipio(
       this.cId,
       this.cIdDepartam,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
       this.cNombre,
     )
 
+
     let myMuni=new MunicipioDTO(
       this.cIdDepartam,
-      this.cCodigo,
+      this.cCodigo.toUpperCase(),
       this.cNombre,
     )
 
@@ -69,8 +77,32 @@ export class HomeMunicipioComponent implements OnInit {
     this.cNombre='';
   }
 
+  clean(){
+    this.cCodigo='';
+    this.cNombre='';
+  }
+
   cId:number=0;
   cIdDepartam:number;
   cCodigo:string="";
   cNombre:string='';
+  cDepa:string='';
+
+
+  generarReporte() {
+    const encabezado=["id","Nombre", "Codigo"];
+    this.municipioService.loadMunicipios().subscribe(data=>{
+      const body=Object(data).map(
+        (obj:any)=>{
+          const datos=[
+            obj.id,
+            obj.nombre,
+            obj.codigo,
+          ]
+          return datos;
+        }
+      );
+      this.print.imprimir(encabezado, body, "departamento", true);
+    })
+  }
 }
