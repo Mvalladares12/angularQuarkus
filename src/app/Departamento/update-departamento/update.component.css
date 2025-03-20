@@ -1,0 +1,11 @@
+.boton {
+  background-color: #f8f9fa; /* Color de fondo similar a btn-light */
+  border: 1px solid #ddd; /* Borde sutil */
+  border-radius: 0.25rem; /* Bordes redondeados */
+  padding: 0.375rem 0.75rem; /* Padding similar a los botones de Bootstrap */
+  transition: background-color 0.3s ease; /* Transición suave solo para el fondo */
+}
+
+.boton:hover {
+  background-color: #e2e6ea; /* Cambio de color al hacer hover */
+}

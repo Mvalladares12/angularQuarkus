@@ -54,7 +54,8 @@
       <thead class="thead-dark">
       <tr>
         <th class="text-center" scope="col">Codigo</th>
-        <th class="text-center" scope="col">Nombre</th>
+        <th class="text-center" scope="col">Distrito</th>
+        <th class="text-center" scope="col">Municipio</th>
         <th class="text-center" scope="col">Acciones</th>
       </tr>
       </thead>
@@ -62,12 +63,13 @@
       <tr *ngFor="let dist of distritos | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
         <td class="text-center" scope="row">{{dist.codigo}}</td>
         <td class="text-center" >{{ dist.nombre}}</td>
+        <td class="text-center" >{{ dist.idMunicipio}}</td>
         <td class="text-center">
           <!--        <a [routerLink]="['/actualiza', depa.id]">-->
           <!--        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">-->
           <!--      </a>-->
-          <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
-            <img [routerLink]="['/actualiza', i]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
+          <a [routerLink]="['/actualizaDistrito', dist.id]" [queryParams]="{action:'1'}">
+            <img [routerLink]="['/actualizaDistrito', dist.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
           </a>
           <swal
             #deleteSwal

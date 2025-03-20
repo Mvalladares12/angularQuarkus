@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
     this.departamentoService.loadDepartamentos().subscribe(myDepa => {
       this.departamentos=Object.values(myDepa);
       this.departamentoService.setDepartamentos(this.departamentos);
+      //console.log(this.departamentos);
     })
   }
 

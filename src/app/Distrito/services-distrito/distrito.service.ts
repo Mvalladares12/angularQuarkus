@@ -44,19 +44,19 @@ export class DistritoService{
 
 
 
-  findDistritos(index: number){
-    console.log(this.distritos);
-    return this.distritos[index];
+  findDistri(index: number){
+    console.log(this.distritos.find(x => x.id == index));
+    return this.distritos.find(x => x.id == index);
   }
 
 
 
 
-  updateDistritos(index:number, distrito:DistritoDTO){
-    let modifiedDistrito=this.distritos[index];
-    modifiedDistrito.nombre=distrito.nombre;
-
-    this.dataDistritoService.updateDistritos(index,modifiedDistrito);
+  updateDistritos(index:number,id:number, distrito:DistritoDTO){
+    let modifiedDistrito=this.distritos.find(x => x.id == index);
+    modifiedDistrito!.nombre=distrito.nombre;
+    modifiedDistrito!.codigo=distrito.codigo;
+    this.dataDistritoService.updateDistritos(id,modifiedDistrito!);
   }
 
 

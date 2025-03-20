@@ -23,10 +23,13 @@ import {DataDistritoService} from './Distrito/services-distrito/data-distrito.se
 import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
+
   {path:'',component:HomeComponent},
-  {path:'actualiza/:id',component:UpdateComponent},
   {path:'municipio',component:HomeMunicipioComponent},
   {path:'distrito',component:HomeDistritoComponent},
+  {path:'actualiza/:id',component:UpdateComponent},
+  {path:'actualizaMuni/:id',component:UpdateMunicipioComponent},
+  {path:'actualizaDistrito/:id',component:UpdateDistritoComponent},
   {path:'**',component:ErrorComponent},
 ]
 
@@ -51,9 +54,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgxPaginationModule,
   ],
-  providers: [
-    provideClientHydration(withEventReplay()),DistritoService, DataDistritoService, MunicipioService, DataMunicipioService, DepartamentoService, DataDepartamentoService
-  ],
+  providers: [DistritoService, DataDistritoService, MunicipioService, DataMunicipioService, DepartamentoService, DataDepartamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

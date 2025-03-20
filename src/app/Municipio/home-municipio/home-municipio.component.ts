@@ -22,11 +22,13 @@ export class HomeMunicipioComponent implements OnInit {
     this.municipioService.loadMunicipios().subscribe(myMunicipio => {
       this.municipios=Object.values(myMunicipio);
       this.municipioService.setMunicipios(this.municipios);
+      console.log(this.municipios);
     })
 
     this.municipioService.loadDepa().subscribe((myDepartamento) => {
       this.depa=Object.values(myDepartamento);
       this.municipioService.setDepa(this.depa);
+      //const nombreDepa=this.municipios.find(x=>x.id===Municipio.i)
     })
   }
 

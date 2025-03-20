@@ -42,19 +42,24 @@ export class MunicipioService {
 
 
 
-  findMunicipios(index: number){
+  /*findMunicipios(index: number){
     console.log(this.municipios);
     return this.municipios[index];
+  }*/
+
+
+  findMuni(index:number){
+    console.log(this.municipios.find(x => x.id == index));
+    return this.municipios.find(x => x.id == index);
   }
 
 
 
-
-  updateMunicipios(index:number, municipio:MunicipioDTO){
-    let modifiedMuni=this.municipios[index];
-    modifiedMuni.nombre=municipio.nombre;
-
-    this.dataService.updateMunicipios(index,modifiedMuni);
+  updateMunicipios(index:number, id:number, municipio:MunicipioDTO){
+    let modifiedMuni=this.municipios.find(x=>x.id===index);
+    modifiedMuni!.nombre=municipio.nombre;
+    modifiedMuni!.codigo=municipio.codigo;
+    this.dataService.updateMunicipios(id,modifiedMuni!);
   }
 
 

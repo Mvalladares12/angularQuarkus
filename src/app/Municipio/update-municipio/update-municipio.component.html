@@ -1,1 +1,35 @@
-<p>update-municipio works!</p>
+<form action="">
+  <div class="d-flex justify-content-center align-items-center" style="height: 25vh; margin-top: 20vh">
+    <div class="box" style="width: 80%; border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); padding: 20px;">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputCodigo" disabled placeholder="" name="cCodigo" [(ngModel)]="cCodigo">
+            <label for="floatingInputCodigo">Código</label>
+          </div>
+          <div class="form-text" id="basic-addon1">Campo deshabilitado.</div>
+          <div style="margin-top: 10px;">
+            <div class="d-flex ">
+              <input type="submit" class="boton" value="--" id="update" [disabled]="nombre.invalid" (click)="update()" style="border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); border-radius: 100%; padding-left: 20px; background: white url('/save.png') center no-repeat; background-size: 25px 25px;">
+              <!--              <img src="/save.png" style="height: 25px; width: 25px;" (click)="update()">-->
+              <!--            </input>-->
+              <a class="btn btn-light rounded-circle mx-2" (click)="backHome()" style="border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); padding: 8px;">
+                <img src="/close.png" style="height: 25px; width: 25px;" (click)="backHome()">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputNombre" name="cNombre" [(ngModel)]="cNombre" #nombre="ngModel" required placeholder="Nombre" maxlength="80">
+            <label for="floatingInputNombre">Nombre</label>
+            <div *ngIf="nombre.invalid && nombre.value?.length < 81" class="text-danger">
+              El nombre es obligatorio.
+            </div>
+          </div>
+          <div class="form-text" id="basic-addon2">Mínimo 5 caracteres, máximo 80.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

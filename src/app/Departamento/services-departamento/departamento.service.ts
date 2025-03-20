@@ -21,10 +21,9 @@ export class DepartamentoService {
   }
 
 
-  departamento:DepartamentoDTO;
   departamentos: Departamento[]=[];
+  departamento:DepartamentoDTO;
   //departamentoDTO: DepartamentoDTO[]=[];
-
 
 
 
@@ -37,19 +36,17 @@ export class DepartamentoService {
 
 
 
-  findDepartamentos(index: number){
-    console.log(this.departamentos);
-    return this.departamentos[index];
+  findDepa(index: number){
+    console.log(this.departamentos.find(x => x.id == index));
+    return this.departamentos.find(x => x.id == index);
   }
 
 
-
-
-  updateDepartamentos(index:number, departamento:DepartamentoDTO){
-    let modifiedDepa=this.departamentos[index];
-    modifiedDepa.nombre=departamento.nombre;
-
-    this.dataService.updateDepartamentos(index,modifiedDepa);
+  updateDepartamentos(index:number, id:number, departamento:DepartamentoDTO){
+    let modifiedDepa=this.departamentos.find(x => x.id === index);
+    modifiedDepa!.nombre=departamento.nombre;
+    modifiedDepa!.codigo=departamento.codigo;
+    this.dataService.updateDepartamentos(id,modifiedDepa!);
   }
 
 
@@ -57,6 +54,5 @@ export class DepartamentoService {
   deleteDepartamentos(index:number){
     this.dataService.deleteDepartamentos(index);
     this.departamentos.splice(index,1);
-    //this.dataService.saveDepartamentos(this.departamento);
   }
 }

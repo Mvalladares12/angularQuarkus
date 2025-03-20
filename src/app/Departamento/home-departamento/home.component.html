@@ -52,8 +52,8 @@
         <td class="text-center" scope="row">{{depa.codigo}}</td>
         <td class="text-center">{{ depa.nombre}}</td>
         <td class="text-center">
-          <a [routerLink]="['/actualiza', i]" [queryParams]="{action:'1'}">
-            <img [routerLink]="['/actualiza', i]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
+          <a [routerLink]="['/actualiza', depa.id]" [queryParams]="{action:'1'}">
+            <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">
           </a>
           <swal #deleteSwal title="¿Borrar {{ depa.nombre }}?" text="Si lo elimina no se podrá recuperar" icon="question" [showCancelButton]="true" [focusCancel]="true" (confirm)="delete(depa.id, i)"></swal>
           <a [swal]="deleteSwal">

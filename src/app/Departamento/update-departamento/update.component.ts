@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DepartamentoService} from '../services-departamento/departamento.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Departamento} from '../models-departamento/departamento.model';
@@ -21,51 +21,44 @@ export class UpdateComponent implements OnInit {
   cNombre: string='';
   cCodigo: string='';
   index: number = 0;
-  action: number = 0;
-
-  departamentos:Departamento[] = [];
 
   ngOnInit(): void {
-    /*this.departamentoService.loadDepartamentos().subscribe(myTabla => {
-      this.departamentos=Object.values(myTabla);
+    this.departamentoService.loadDepartamentos().subscribe(myDepa => {
+      this.departamentos=Object.values(myDepa);
       this.departamentoService.setDepartamentos(this.departamentos);
-    })*/
-    this.action = parseInt(this.route.snapshot.queryParams['action']);
+      console.log(this.departamentos);
+
     this.departamentos=this.departamentoService.departamentos;
     this.index=parseInt(this.route.snapshot.params['id']);
     console.log(this.departamentos);
     console.log(this.index);
-    if(this.index<this.departamentos.length){
-      let departamento:Departamento=this.departamentoService.findDepartamentos(this.index);
-      this.cNombre = departamento.nombre;
-      this.cCodigo = departamento.codigo;
-    }else {
-      console.log("fuera de rango")
-    }
+    let departamento:Departamento=this.departamentoService.findDepa(this.index)!;
+    this.cId= departamento.id;
+    this.cNombre = departamento.nombre;
+    this.cCodigo = departamento.codigo;
+    })
   }
 
 
-
-  departamentoDTO:DepartamentoDTO[]=[];
+  departamentos:Departamento[] = [];
 
 
   backHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 
 
-  /*update-departamento(){
-    if(this.action==1){
-      this.router.navigate(['']);
-      let myTabla=new DepartamentoDTO(
+  update(){
+     if(this.cId!=null){
+       this.router.navigate(['']);
+      const myTabla=new DepartamentoDTO(
         this.cCodigo,
         this.cNombre
       );
-      this.departamentoService.updateDepartamentos(this.index,myTabla);
+      this.departamentoService.updateDepartamentos(this.index, this.cId,myTabla)
     }else {
       this.router.navigate(['']);
-      //this.departamentoService.deleteDepartamentos(this.index);
     }
-  }*/
+  }
 
 }

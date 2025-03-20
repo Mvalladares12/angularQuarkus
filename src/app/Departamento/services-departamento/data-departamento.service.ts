@@ -31,7 +31,7 @@ export class DataDepartamentoService {
   }
 
 
-  updateDepartamentos(index:number, departamento:Departamento){
+  updateDepartamentos(index:number, departamento:DepartamentoDTO){
     let url= `${this.apiURL}/${index}`;
 
     this.http.put(url, departamento).subscribe(
