@@ -3,6 +3,7 @@ import {DistritoService} from '../services-distrito/distrito.service';
 import {Distrito, Muni} from '../models-distrito/distrito.model';
 import {DistritoDTO} from '../models-distrito/distritoDTO.model';
 import {PrintService} from '../../print.service';
+import {Municipio} from '../../Municipio/models-municipio/municipio.model';
 
 @Component({
   selector: 'app-home-distrito',
@@ -33,10 +34,21 @@ export class HomeDistritoComponent implements OnInit {
 
   distritos:Distrito[]=[];
   muni:Muni[]=[];
+  muni2:string;
+  i:number;
 
   deleteDistrito(id:number, index:number){
     this.distritos.splice(index,1);
     this.distritoService.deleteDistritos(id);
+  }
+
+
+  mostrarDepa(distrito:Distrito){
+    for (this.i=0; this.i< this.distritos.length; this.i++) {
+      const depa = this.muni.find(x => x.id == distrito.idMunicipio);
+      return this.muni2=depa!.nombre;
+    }
+    return false;
   }
 
 

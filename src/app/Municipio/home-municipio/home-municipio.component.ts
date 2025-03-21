@@ -38,10 +38,21 @@ export class HomeMunicipioComponent implements OnInit {
 
   municipios:Municipio[]=[];
   depa:Depa[]=[];
+  depa2:string;
+  i: number;
 
   deleteMunicipios(id:number, index:number){
     this.municipioService.deleteMunicipios(id);
     this.municipios.splice(index,1);
+  }
+
+
+  mostrarDepa(municipio:Municipio){
+    for (this.i=0; this.i< this.municipios.length; this.i++) {
+      const depa = this.depa.find(x => x.id == municipio.idDepartamento);
+      return this.depa2=depa!.nombre;
+    }
+    return false;
   }
 
 
@@ -92,13 +103,14 @@ export class HomeMunicipioComponent implements OnInit {
 
 
   generarReporte() {
-    const encabezado=["id","Nombre", "Codigo"];
+    const encabezado=["id","Nombre","Departamento", "Codigo"];
     this.municipioService.loadMunicipios().subscribe(data=>{
       const body=Object(data).map(
         (obj:any)=>{
           const datos=[
             obj.id,
             obj.nombre,
+            obj.depa2,
             obj.codigo,
           ]
           return datos;

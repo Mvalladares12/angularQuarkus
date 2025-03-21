@@ -63,7 +63,7 @@
       <tr *ngFor="let muni of municipios | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
         <td class="text-center" >{{muni.codigo}}</td>
         <td class="text-center" >{{ muni.nombre}}</td>
-        <td class="text-center">{{muni.idDepartamento}}</td>
+        <td class="text-center">{{mostrarDepa(muni)}}</td>
         <td class="text-center">
           <a [routerLink]="['/actualizaMuni', muni.id]" [queryParams]="{action:'1'}">
             <img [routerLink]="['/actualizaMuni', muni.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">

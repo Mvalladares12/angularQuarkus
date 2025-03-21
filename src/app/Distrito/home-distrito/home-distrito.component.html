@@ -63,7 +63,7 @@
       <tr *ngFor="let dist of distritos | paginate: { itemsPerPage: 5, currentPage: p }  let i = index" >
         <td class="text-center" scope="row">{{dist.codigo}}</td>
         <td class="text-center" >{{ dist.nombre}}</td>
-        <td class="text-center" >{{ dist.idMunicipio}}</td>
+        <td class="text-center" >{{ mostrarDepa(dist)}}</td>
         <td class="text-center">
           <!--        <a [routerLink]="['/actualiza', depa.id]">-->
           <!--        <img [routerLink]="['/actualiza', depa.id]" src="/pencil.png" style="width: 25px; height: 25px; cursor: pointer;">-->
