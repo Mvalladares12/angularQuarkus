@@ -55,4 +55,8 @@ export class DepartamentoService {
     this.dataService.deleteDepartamentos(index);
     this.departamentos.splice(index,1);
   }
+
+  descargarReporte(){
+    return this.dataService.getReport();
+  }
 }

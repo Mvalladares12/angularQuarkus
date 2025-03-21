@@ -46,7 +46,11 @@ export class HomeDistritoComponent implements OnInit {
   mostrarDepa(distrito:Distrito){
     for (this.i=0; this.i< this.distritos.length; this.i++) {
       const depa = this.muni.find(x => x.id == distrito.idMunicipio);
-      return this.muni2=depa!.nombre;
+      if (depa!.nombre!=null){
+        return this.muni2=depa!.nombre;
+      }else {
+        return "No se encontraron los municipios";
+      }
     }
     return false;
   }

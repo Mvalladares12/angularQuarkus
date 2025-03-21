@@ -21,6 +21,11 @@ import { UpdateDistritoComponent } from './Distrito/update-distrito/update-distr
 import {DistritoService} from './Distrito/services-distrito/distrito.service';
 import {DataDistritoService} from './Distrito/services-distrito/data-distrito.service';
 import { ErrorComponent } from './error/error.component';
+import { provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import { providePrimeNG} from 'primeng/config';
+import {ButtonModule} from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import aura from '@primeng/themes/aura'
 
 const routes: Routes = [
 
@@ -53,8 +58,10 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     NgxPaginationModule,
+    ButtonModule,
+    TableModule
   ],
-  providers: [DistritoService, DataDistritoService, MunicipioService, DataMunicipioService, DepartamentoService, DataDepartamentoService],
+  providers: [DistritoService, DataDistritoService, MunicipioService, DataMunicipioService, DepartamentoService, DataDepartamentoService, providePrimeNG({theme:{preset:aura}}), provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

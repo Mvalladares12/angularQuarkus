@@ -4,18 +4,19 @@ import {DepartamentoService} from '../services-departamento/departamento.service
 import {Router} from '@angular/router';
 import {DepartamentoDTO} from '../models-departamento/departamentoDTO.model';
 import {PrintService} from '../../print.service';
+import {DataDepartamentoService} from '../services-departamento/data-departamento.service';
 
 
 @Component({
   selector: 'app-home-departamento',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
 
 
-  constructor(private departamentoService: DepartamentoService, private router:Router, private print:PrintService) {
+  constructor(private departamentoService: DepartamentoService, private router:Router, private print:PrintService, private dds:DataDepartamentoService) {
   }
 
   ngOnInit(): void {
@@ -63,21 +64,25 @@ export class HomeComponent implements OnInit {
   cCodigo:string="";
   cNombre:string='';
 
-
-  generarReporte() {
-    const encabezado=["id","Nombre", "Codigo"];
-    this.departamentoService.loadDepartamentos().subscribe(data=>{
-      const body=Object(data).map(
-        (obj:any)=>{
-          const datos=[
-            obj.id,
-            obj.nombre,
-            obj.codigo,
-          ]
-          return datos;
-        }
-      );
-      this.print.imprimir(encabezado, body, "departamento", true);
-    })
+  generarReporte(){
+    this.departamentoService.descargarReporte();
+    console.log(this.departamentoService.descargarReporte());
   }
+
+  // generarReporte() {
+  //   const encabezado=["id","Nombre", "Codigo"];
+  //   this.departamentoService.loadDepartamentos().subscribe(data=>{
+  //     const body=Object(data).map(
+  //       (obj:any)=>{
+  //         const datos=[
+  //           obj.id,
+  //           obj.nombre,
+  //           obj.codigo,
+  //         ]
+  //         return datos;
+  //       }
+  //     );
+  //     this.print.imprimir(encabezado, body, "departamento", true);
+  //   })
+  // }
 }

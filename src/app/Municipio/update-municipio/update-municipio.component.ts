@@ -54,6 +54,7 @@ export class UpdateMunicipioComponent implements OnInit {
         this.cId,
         this.cCodigo,
         this.cNombre
+
       );
       this.municipioService.updateMunicipios(this.index, this.cId,myTabla)
     }else {

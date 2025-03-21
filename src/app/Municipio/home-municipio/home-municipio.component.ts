@@ -50,7 +50,12 @@ export class HomeMunicipioComponent implements OnInit {
   mostrarDepa(municipio:Municipio){
     for (this.i=0; this.i< this.municipios.length; this.i++) {
       const depa = this.depa.find(x => x.id == municipio.idDepartamento);
-      return this.depa2=depa!.nombre;
+      if(depa!.nombre!=null){
+        return this.depa2=depa!.nombre;
+      }else {
+        return "No se encontraron los departamentos";
+      }
+
     }
     return false;
   }

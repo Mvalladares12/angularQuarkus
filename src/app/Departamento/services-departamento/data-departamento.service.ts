@@ -51,4 +51,8 @@ export class DataDepartamentoService {
       (error) => console.log(`Error: ${error}`)
     )
   }
+
+  getReport(){
+    return this.http.get(this.apiDepa+'/pdf');
+  }
 }
