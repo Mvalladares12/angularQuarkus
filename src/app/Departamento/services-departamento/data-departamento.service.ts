@@ -52,7 +52,7 @@ export class DataDepartamentoService {
     )
   }
 
-  getReport(){
-    return this.http.get(this.apiDepa+'/pdf');
+  getReport():Observable<Blob>{
+    return this.http.get(this.apiDepa+'/pdf', {responseType: "blob"});
   }
 }

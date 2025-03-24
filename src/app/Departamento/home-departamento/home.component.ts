@@ -64,9 +64,20 @@ export class HomeComponent implements OnInit {
   cCodigo:string="";
   cNombre:string='';
 
-  generarReporte(){
-    this.departamentoService.descargarReporte();
-    console.log(this.departamentoService.descargarReporte());
+  generarReporte() {
+    this.dds.getReport().subscribe((data: Blob) => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error al descargar el reporte', error);
+    });
   }
 
   // generarReporte() {
